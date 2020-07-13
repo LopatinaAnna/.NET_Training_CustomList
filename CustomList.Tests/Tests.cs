@@ -265,163 +265,162 @@ namespace CustomList.Tests
 
 
 
-        //TODO: Uncomment this if you want to check your task for advanced unit tests
-        //#region Advanced
-        //[Test]
-        //public void CopyTo_ArrayIsNull_ThrowsArgumentNullException()
-        //{
-        //    //arrange
-        //    CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
-        //    int[] array = null;
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.CopyTo(array, 2));
-        //    //assert           
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Copy To throws ArgumentNullException ,if array is null ");
+        #region Advanced
+        [Test]
+        public void CopyTo_ArrayIsNull_ThrowsArgumentNullException()
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
+            int[] array = null;
+            var expectedEx = typeof(ArgumentNullException);
+            //act
+            var actEx = Assert.Catch(() => list.CopyTo(array, 2));
+            //assert           
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Copy To throws ArgumentNullException ,if array is null ");
 
-        //}
+        }
 
-        //[Test]
-        //public void CopyTo_ThrowsArgumentException()
-        //{
-        //    //arrange
-        //    CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
-        //    int[] array = new int[2];
-        //    var expectedEx = typeof(ArgumentException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.CopyTo(array, 2));
-        //    //assert            
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Copy to throws ArgumentException in case array has invalid size");
+        [Test]
+        public void CopyTo_ThrowsArgumentException()
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
+            int[] array = new int[2];
+            var expectedEx = typeof(ArgumentException);
+            //act
+            var actEx = Assert.Catch(() => list.CopyTo(array, 2));
+            //assert            
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Copy to throws ArgumentException in case array has invalid size");
 
-        //}
-        //[Test]
-        //public void GetEnumerator_OfListAndCustomList_ShouldHaveEqualElements()
-        //{
-        //    //arrange 
-        //    List<int> list = new List<int>() { 1, 2, 3 };
-        //    CustomList<int> custom = new CustomList<int>(list);
-        //    //act
-        //    var en = list.GetEnumerator();
-        //    var en2 = custom.GetEnumerator();
-        //    //assert
-        //    if (en.MoveNext() && en2.MoveNext())
-        //    {
-        //        Assert.AreEqual(en.Current, en2.Current,
-        //            message: "GetEnumerator works incorrectly");
-        //    }
-        //}
+        }
+        [Test]
+        public void GetEnumerator_OfListAndCustomList_ShouldHaveEqualElements()
+        {
+            //arrange 
+            List<int> list = new List<int>() { 1, 2, 3 };
+            CustomList<int> custom = new CustomList<int>(list);
+            //act
+            var en = list.GetEnumerator();
+            var en2 = custom.GetEnumerator();
+            //assert
+            if (en.MoveNext() && en2.MoveNext())
+            {
+                Assert.AreEqual(en.Current, en2.Current,
+                    message: "GetEnumerator works incorrectly");
+            }
+        }
 
-        //[Test]
-        //public void GetEnumerator_UsingIEnumerableExplicitlyOfListAndCustomList_ShouldHaveEqualElements()
-        //{
-        //    //arrange 
-        //    List<int> list = new List<int>() { 1, 2, 3 };
-        //    CustomList<int> custom = new CustomList<int>(list);
-        //    List<int> actualList = new List<int>();
+        [Test]
+        public void GetEnumerator_UsingIEnumerableExplicitlyOfListAndCustomList_ShouldHaveEqualElements()
+        {
+            //arrange 
+            List<int> list = new List<int>() { 1, 2, 3 };
+            CustomList<int> custom = new CustomList<int>(list);
+            List<int> actualList = new List<int>();
 
-        //    //act
-        //    IEnumerable enumerable = custom;
-        //    foreach (int item in enumerable)
-        //    {
-        //        actualList.Add(item);
-        //    }
+            //act
+            IEnumerable enumerable = custom;
+            foreach (int item in enumerable)
+            {
+                actualList.Add(item);
+            }
 
-        //    //assert
-        //    CollectionAssert.AreEqual(list, actualList, message: "GetEnumerator works incorrectly");
-        //}
-        //[Test]
-        //public void CreateCustomList_WithNullList_ShouldThrowArgumentNullException()
-        //{
-        //    //arrange
-        //    List<int> list = null;
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    //act
-        //    var actEx = Assert.Catch(() => new CustomList<int>(list));
-        //    //assert
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "CustomList can't be created  in case of list is null ");
-        //}
+            //assert
+            CollectionAssert.AreEqual(list, actualList, message: "GetEnumerator works incorrectly");
+        }
+        [Test]
+        public void CreateCustomList_WithNullList_ShouldThrowArgumentNullException()
+        {
+            //arrange
+            List<int> list = null;
+            var expectedEx = typeof(ArgumentNullException);
+            //act
+            var actEx = Assert.Catch(() => new CustomList<int>(list));
+            //assert
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "CustomList can't be created  in case of list is null ");
+        }
 
-        //[Test]
-        //public void CreateCustomList_WithNullArray_ShouldThrowArgumentNullException()
-        //{
-        //    int[] array = null;
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    var actualEx = Assert.Catch(() => new CustomList<int>(array));
-        //    Assert.AreEqual(expectedEx, actualEx.GetType(), message: "Custom List can't be created in case of array is null");
-        //}
+        [Test]
+        public void CreateCustomList_WithNullArray_ShouldThrowArgumentNullException()
+        {
+            int[] array = null;
+            var expectedEx = typeof(ArgumentNullException);
+            var actualEx = Assert.Catch(() => new CustomList<int>(array));
+            Assert.AreEqual(expectedEx, actualEx.GetType(), message: "Custom List can't be created in case of array is null");
+        }
 
-        //[TestCase(-2)]
-        //[TestCase(6)]
-        //public void Insert_AtWrongPositionValue_ThrowArgumentOutOfRange(int position)
-        //{
-        //    //arrange
-        //    CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
-        //    var expectedEx = typeof(ArgumentOutOfRangeException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.Insert(position, 100));
-        //    //assert
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Insert throws ArgumentOutOfRangeException, if position is out of list range ");
+        [TestCase(-2)]
+        [TestCase(6)]
+        public void Insert_AtWrongPositionValue_ThrowArgumentOutOfRange(int position)
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>(1, 2, 3, 4, 5);
+            var expectedEx = typeof(ArgumentOutOfRangeException);
+            //act
+            var actEx = Assert.Catch(() => list.Insert(position, 100));
+            //assert
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Insert throws ArgumentOutOfRangeException, if position is out of list range ");
 
-        //}
+        }
 
-        //[Test]
-        //public void Insert_AtPositionNullValue_ThrowsArgumentsNullException()
-        //{
-        //    //arrange
-        //    CustomList<object> list = new CustomList<object>();
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.Insert(0, null));
-        //    //assert           
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Insert throws ArgumentNullException in case  item is null");
+        [Test]
+        public void Insert_AtPositionNullValue_ThrowsArgumentsNullException()
+        {
+            //arrange
+            CustomList<object> list = new CustomList<object>();
+            var expectedEx = typeof(ArgumentNullException);
+            //act
+            var actEx = Assert.Catch(() => list.Insert(0, null));
+            //assert           
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Insert throws ArgumentNullException in case  item is null");
 
-        //}
-        //[TestCase(-1)]
-        //[TestCase(3)]
-        //public void RemoveAt_WrongPosition_ThrowIndexOutOfRangeException(int position)
-        //{
-        //    //arrange
-        //    CustomList<int> list = new CustomList<int>(1, 0);
-        //    var expectedEx = typeof(ArgumentOutOfRangeException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.RemoveAt(position));
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "RemoveAt throws ArgumentOutOfRangeException in case  position is out of list range  ");
+        }
+        [TestCase(-1)]
+        [TestCase(3)]
+        public void RemoveAt_WrongPosition_ThrowIndexOutOfRangeException(int position)
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>(1, 0);
+            var expectedEx = typeof(ArgumentOutOfRangeException);
+            //act
+            var actEx = Assert.Catch(() => list.RemoveAt(position));
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "RemoveAt throws ArgumentOutOfRangeException in case  position is out of list range  ");
 
-        //}
-        //[TestCase(-1)]
-        //[TestCase(2)]
-        //public void Get_WrongIndex_ThrowsIndexOutOfRange(int index)
-        //{
-        //    //arrange
-        //    CustomList<int> list = new CustomList<int>(1);
-        //    var expectedEx = typeof(IndexOutOfRangeException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list[index].ToString());
+        }
+        [TestCase(-1)]
+        [TestCase(2)]
+        public void Get_WrongIndex_ThrowsIndexOutOfRange(int index)
+        {
+            //arrange
+            CustomList<int> list = new CustomList<int>(1);
+            var expectedEx = typeof(IndexOutOfRangeException);
+            //act
+            var actEx = Assert.Catch(() => list[index].ToString());
 
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Indexer throws IndexOutOfRangeException in case index is out of list range  ");
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Indexer throws IndexOutOfRangeException in case index is out of list range  ");
 
 
-        //}
-        //[Test]
-        //public void Remove_Null_ThrowArgumentNullException()
-        //{
-        //    //arrange
-        //    CustomList<object> list = new CustomList<object>(1, 2, 3);
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    //act
-        //    var actEx = Assert.Catch(() => list.Remove(null));
-        //    //assert           
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Remove throws ArgumentNullException in case  item is null ");
+        }
+        [Test]
+        public void Remove_Null_ThrowArgumentNullException()
+        {
+            //arrange
+            CustomList<object> list = new CustomList<object>(1, 2, 3);
+            var expectedEx = typeof(ArgumentNullException);
+            //act
+            var actEx = Assert.Catch(() => list.Remove(null));
+            //assert           
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Remove throws ArgumentNullException in case  item is null ");
 
-        //}
-        //#endregion
+        }
+        #endregion
     }
 }

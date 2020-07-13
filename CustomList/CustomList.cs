@@ -29,6 +29,9 @@ namespace CustomList
         /// <param name="values"></param>
         public CustomList(params T[] values)
         {
+            if (values is null)
+                throw new ArgumentNullException(nameof(values));
+
             foreach (var item in values)
             {
                 Add(item);
@@ -42,6 +45,9 @@ namespace CustomList
         /// <param name="values"></param>
         public CustomList(IEnumerable<T> values)
         {
+            if (values is null)
+                throw new ArgumentNullException(nameof(values));
+
             foreach (var item in values)
             {
                 Add(item);
@@ -57,36 +63,34 @@ namespace CustomList
         {
             get
             {
+                if (index < 0 || index > Count-1)
+                    throw new IndexOutOfRangeException(nameof(index)) as Exception;
+
                 int count = 0;
                 Item<T> current = Head;
                 while (current != null && count <= index)
                 {
                     if (count == index)
-                    {
                         return current.Data;
-                    }
                     else
-                    {
                         current = current.Next;
-                    }
                     ++count;
                 }
                 return default;
             }
             set
             {
+                if (index < 0 || index > Count - 1)
+                    throw new IndexOutOfRangeException(nameof(index)) as Exception;
+
                 int count = 0;
                 Item<T> current = Head;
                 while (current != null && count <= index)
                 {
                     if (count == index)
-                    {
                         current.Data = value;
-                    }
                     else
-                    {
                         current = current.Next;
-                    }
                     ++count;
                 }
             }
@@ -100,9 +104,7 @@ namespace CustomList
         public void Add(T item)
         {
             if (item == null)
-            {
                 throw new ArgumentNullException(nameof(item));
-            }
 
             Item<T> addItem = new Item<T>(item);
             Item<T> current = Head;
@@ -164,6 +166,9 @@ namespace CustomList
         /// <exception cref="ArgumentNullException">Throws when you try to remove null</exception>
         public bool Remove(T item)
         {
+            if (item is null)
+                throw new ArgumentNullException(nameof(item));
+
             if (Contains(item))
             {
                 RemoveAt(IndexOf(item));
@@ -198,6 +203,11 @@ namespace CustomList
         /// <exception cref="ArgumentNullException">Thrown when item is null</exception>
         public void Insert(int index, T item)
         {
+            if (index < 0 || index > Count)
+                throw new ArgumentOutOfRangeException(nameof(index));
+            if (item is null)
+                throw new ArgumentNullException(nameof(index));
+
             Item<T> current = Head;
 
             int countIndex = 1;
@@ -288,6 +298,11 @@ namespace CustomList
         ///    than the number of elements that the destination array can contain</exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array is null)
+                throw new ArgumentNullException(nameof(array));
+            if (array.Length < Count)
+                throw new ArgumentException(nameof(array));
+
             for (int i = arrayIndex, j = 0; i < Count + arrayIndex; i++, j++)
             {
                 array[i] = this[j];
@@ -300,12 +315,17 @@ namespace CustomList
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)Head).GetEnumerator();
+            Item<T> current = Head;
+            while (current != null)
+            {
+                yield return current.Data;
+                current = current.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<T>)Head).GetEnumerator();
+            return ((IEnumerable<T>)this).GetEnumerator();
         }
     }
 }
